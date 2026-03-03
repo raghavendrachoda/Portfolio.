@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Raghavendra Reddy Choda – MBA | Finance &amp; Product</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#0a1628;--navy2:#112240;--navy3:#1d3461;
+    --accent:#4fc3f7;--gold:#f4a922;--white:#f0f4f8;
+    --text:#ccd6f6;--muted:#8892b0;--card:#112240;
+    --border:#233554;--radius:12px;--shadow:0 10px 30px rgba(0,0,0,.4)
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--navy);color:var(--text);line-height:1.6;overflow-x:hidden}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;transition:box-shadow .3s}
+  nav.scrolled{box-shadow:0 4px 20px rgba(0,0,0,.5)}
+  .nav-logo{font-weight:700;font-size:1.1rem;color:var(--accent);letter-spacing:1px}
+  .nav-links{display:flex;gap:1.8rem;list-style:none}
+  .nav-links a{font-size:.82rem;font-weight:600;letter-spacing:.5px;color:var(--muted);transition:color .2s;text-transform:uppercase}
+  .nav-links a:hover,.nav-links a.active{color:var(--accent);text-decoration:none}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+  .hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:all .3s;border-radius:2px}
+  .mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:var(--navy2);padding:1.5rem 2rem;flex-direction:column;gap:1.2rem;z-index:99;border-bottom:1px solid var(--border)}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{font-size:1rem;color:var(--text);padding:.5rem 0;border-bottom:1px solid var(--border)}
+
+  /* SECTION */
+  .section-inner{padding:5rem 2rem;max-width:1080px;margin:0 auto}
+  .section-label{font-size:.72rem;font-weight:700;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:.5rem}
+  .section-title{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800;color:var(--white);margin-bottom:.4rem}
+  .section-divider{width:60px;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:2px;margin-bottom:2.5rem}
+
+  /* HERO */
+  .hero-wrap{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:100px 2rem 4rem;max-width:1080px;margin:0 auto}
+  .hero-eyebrow{font-size:.82rem;letter-spacing:3px;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:1rem;opacity:0;animation:fadeUp .6s .2s forwards}
+  .hero-name{font-size:clamp(2.4rem,7vw,5rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:.5rem;opacity:0;animation:fadeUp .6s .4s forwards}
+  .hero-role{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--muted);font-weight:500;margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .6s forwards}
+  .hero-role span{color:var(--gold)}
+  .hero-sub{max-width:560px;color:var(--muted);font-size:1rem;margin-bottom:2.5rem;line-height:1.8;opacity:0;animation:fadeUp .6s .8s forwards}
+  .hero-sub strong{color:var(--white)}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .6s 1s forwards}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.75rem 1.75rem;border-radius:6px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;border:none}
+  .btn-primary{background:var(--accent);color:var(--navy)}
+  .btn-primary:hover{background:#81d4fa;transform:translateY(-2px);box-shadow:0 8px 20px rgba(79,195,247,.3);text-decoration:none}
+  .btn-outline{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+  .btn-outline:hover{background:rgba(79,195,247,.08);transform:translateY(-2px);text-decoration:none}
+  .hero-badges{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:3rem;opacity:0;animation:fadeUp .6s 1.2s forwards}
+  .hero-badge{display:flex;align-items:center;gap:.4rem;background:var(--navy2);border:1px solid var(--border);padding:.4rem .9rem;border-radius:20px;font-size:.78rem;color:var(--muted)}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:4rem;align-items:start}
+  .about-avatar{width:100%;max-width:280px;aspect-ratio:1;background:linear-gradient(135deg,var(--navy3),var(--navy2));border-radius:var(--radius);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .about-avatar::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(79,195,247,.12),transparent)}
+  .avatar-initials{font-size:4rem;font-weight:900;color:var(--accent);letter-spacing:-2px;z-index:1;text-shadow:0 0 40px rgba(79,195,247,.5)}
+  .about-text p{color:var(--muted);margin-bottom:1.2rem;font-size:.98rem;line-height:1.8}
+  .about-text p strong{color:var(--white)}
+  .highlight-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem}
+  .hcard{background:var(--navy2);border:1px solid var(--border);padding:1rem 1.2rem;border-radius:var(--radius);border-left:3px solid var(--accent)}
+  .hcard .num{font-size:1.4rem;font-weight:800;color:var(--accent)}
+  .hcard .lbl{font-size:.72rem;color:var(--muted);margin-top:.15rem}
+
+  /* SKILLS */
+  .skills-bg{background:var(--navy2)}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem}
+  .skill-group h4{font-size:.72rem;font-weight:700;letter-spacing:2px;color:var(--gold);text-transform:uppercase;margin-bottom:.9rem}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+  .skill-tag{background:var(--navy);border:1px solid var(--border);padding:.3rem .8rem;border-radius:20px;font-size:.8rem;color:var(--text);transition:all .2s;opacity:0;transform:translateY(8px)}
+  .skill-tag.vis{animation:tagPop .4s forwards}
+  .skill-tag:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,195,247,.05)}
+  @keyframes tagPop{to{opacity:1;transform:translateY(0)}}
+
+  /* PROJECTS */
+  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:2rem}
+  .project-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;transition:transform .25s,box-shadow .25s,border-color .25s;position:relative;overflow:hidden}
+  .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));opacity:0;transition:opacity .3s}
+  .project-card:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:var(--accent)}
+  .project-card:hover::before{opacity:1}
+  .project-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+  .project-type{font-size:.7rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.25rem .7rem;border-radius:20px}
+  .type-med{background:rgba(79,195,247,.15);color:var(--accent)}
+  .type-prod{background:rgba(244,169,34,.15);color:var(--gold)}
+  .project-date{font-size:.78rem;color:var(--muted)}
+  .project-title{font-size:1.35rem;font-weight:800;color:var(--white);margin-bottom:.25rem}
+  .project-subtitle{font-size:.88rem;color:var(--accent);margin-bottom:1rem}
+  .project-desc{font-size:.92rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.75}
+  .impact-row{display:flex;gap:.75rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .istat{background:var(--navy);border:1px solid var(--border);padding:.6rem .9rem;border-radius:8px;flex:1;min-width:90px;text-align:center}
+  .istat .val{font-size:1.05rem;font-weight:800;color:var(--accent)}
+  .istat .desc{font-size:.68rem;color:var(--muted);margin-top:.1rem}
+  .project-bullets{list-style:none;margin-bottom:1.5rem}
+  .project-bullets li{font-size:.87rem;color:var(--text);padding:.3rem 0 .3rem 1.4rem;position:relative;border-bottom:1px solid rgba(255,255,255,.04)}
+  .project-bullets li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:.72rem;top:.38rem}
+  .project-bullets li:last-child{border-bottom:none}
+  .ptags{display:flex;flex-wrap:wrap;gap:.4rem}
+  .ptag{font-size:.7rem;padding:.18rem .6rem;background:var(--navy3);color:var(--muted);border-radius:4px;border:1px solid var(--border)}
+
+  /* EXPERIENCE */
+  .timeline{position:relative;padding-left:2rem}
+  .timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--border)}
+  .titem{position:relative;margin-bottom:2.5rem}
+  .titem::before{content:'';position:absolute;left:-2rem;top:5px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--navy);box-shadow:0 0 10px rgba(79,195,247,.4)}
+  .tmeta{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:.3rem}
+  .tperiod{font-size:.72rem;font-weight:700;letter-spacing:1px;color:var(--accent);text-transform:uppercase}
+  .tloc{font-size:.75rem;color:var(--muted);background:var(--navy2);padding:.18rem .55rem;border-radius:4px;border:1px solid var(--border)}
+  .ttitle{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:.15rem}
+  .torg{font-size:.9rem;color:var(--gold);margin-bottom:.7rem}
+  .tcontent{color:var(--muted);font-size:.9rem;line-height:1.75}
+  .tcontent ul{padding-left:1.2rem;margin-top:.5rem}
+  .tcontent li{margin-bottom:.35rem}
+
+  /* EDUCATION */
+  .edu-bg{background:var(--navy2)}
+  .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+  .edu-card{background:var(--navy);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;transition:border-color .2s}
+  .edu-card:hover{border-color:var(--accent)}
+  .edu-icon{width:42px;height:42px;border-radius:10px;background:rgba(79,195,247,.1);border:1px solid rgba(79,195,247,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem}
+  .edu-degree{font-size:1rem;font-weight:700;color:var(--white)}
+  .edu-field{font-size:.85rem;color:var(--accent);margin-bottom:.2rem}
+  .edu-school{font-size:.9rem;color:var(--gold);font-weight:600;margin-bottom:.2rem}
+  .edu-period{font-size:.75rem;color:var(--muted);margin-bottom:.7rem}
+  .edu-notes{font-size:.82rem;color:var(--muted);line-height:1.65}
+
+  /* CERTS */
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.25rem}
+  .cert-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.4rem;transition:transform .2s,border-color .2s;display:flex;flex-direction:column;gap:.55rem}
+  .cert-card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .cert-card.bbg{border-color:rgba(244,169,34,.4);background:linear-gradient(135deg,var(--card),rgba(244,169,34,.04))}
+  .cert-card.bbg:hover{border-color:var(--gold)}
+  .cert-badge-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.2rem}
+  .cert-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800}
+  .ci-bbg{background:rgba(244,169,34,.15);color:var(--gold);border:1px solid rgba(244,169,34,.3)}
+  .ci-coursera{background:rgba(79,195,247,.1);color:var(--accent);border:1px solid rgba(79,195,247,.2)}
+  .cert-pill{font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:.14rem .5rem;border-radius:20px}
+  .cp-bbg{background:rgba(244,169,34,.2);color:var(--gold);border:1px solid rgba(244,169,34,.3)}
+  .cp-coursera{background:rgba(79,195,247,.1);color:var(--accent);border:1px solid rgba(79,195,247,.2)}
+  .cert-name{font-size:.93rem;font-weight:700;color:var(--white);line-height:1.3}
+  .cert-issuer{font-size:.75rem;color:var(--muted)}
+  .cert-relevance{font-size:.7rem;color:var(--gold);border-top:1px solid var(--border);padding-top:.45rem;margin-top:.1rem;line-height:1.5}
+
+  /* CONTACT */
+  .contact-bg{background:var(--navy2)}
+  .contact-wrap{max-width:600px;margin:0 auto;text-align:center}
+  .contact-text{color:var(--muted);font-size:1rem;margin-bottom:2rem;line-height:1.8}
+  .contact-text strong{color:var(--white)}
+  .open-to{display:inline-flex;align-items:center;gap:.5rem;background:rgba(79,195,247,.08);border:1px solid rgba(79,195,247,.3);padding:.5rem 1.2rem;border-radius:20px;font-size:.8rem;color:var(--accent);margin-bottom:2rem}
+  .open-to::before{content:'';width:8px;height:8px;border-radius:50%;background:#4caf50;box-shadow:0 0 6px #4caf50;animation:pulse 2s infinite;flex-shrink:0}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  .contact-links{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+  .clink{display:flex;align-items:center;gap:.6rem;background:var(--navy);border:1px solid var(--border);padding:.85rem 1.4rem;border-radius:var(--radius);color:var(--text);font-size:.88rem;font-weight:500;transition:all .2s}
+  .clink:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);text-decoration:none}
+
+  /* FOOTER */
+  footer{background:var(--navy);border-top:1px solid var(--border);text-align:center;padding:1.5rem;font-size:.75rem;color:var(--muted)}
+
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.vis{opacity:1;transform:translateY(0)}
+
+  /* RESPONSIVE */
+  @media(max-width:768px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .about-grid{grid-template-columns:1fr}
+    .about-avatar{max-width:160px}
+    .highlight-row{grid-template-columns:1fr 1fr}
+    .projects-grid{grid-template-columns:1fr}
+    .section-inner{padding:4rem 1.25rem}
+  }
+  @media(max-width:480px){
+    .contact-links{flex-direction:column}
+    .clink{justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">RRC</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+  <a href="#certifications">Certifications</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<div class="hero-wrap">
+  <p class="hero-eyebrow">MBA Candidate &nbsp;&middot;&nbsp; Finance &amp; Product Strategy</p>
+  <h1 class="hero-name">Raghavendra<br>Reddy Choda</h1>
+  <p class="hero-role">MBA @ NJIT &nbsp;|&nbsp; <span>Finance &middot; Marketing &middot; Product</span></p>
+  <p class="hero-sub">
+    Computer Science graduate turned MBA candidate &mdash; bridging <strong>technical systems</strong> and <strong>business strategy</strong>. Targeting <strong>Financial Analyst</strong>, <strong>Product Manager</strong>, and <strong>Program Manager</strong> roles in the NJ / NYC Metro area.
+  </p>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      View Projects
+    </a>
+    <a href="#contact" class="btn btn-outline">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+      Get in Touch
+    </a>
+  </div>
+  <div class="hero-badges">
+    <span class="hero-badge">
+      <svg width="12" height="12" fill="none" stroke="var(--accent)" stroke-width="2.2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Bloomberg Certified
+    </span>
+    <span class="hero-badge">
+      <svg width="12" height="12" fill="none" stroke="var(--accent)" stroke-width="2.2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+      NJ / NYC Metro
+    </span>
+    <span class="hero-badge">
+      <svg width="12" height="12" fill="none" stroke="var(--accent)" stroke-width="2.2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      CS + Finance Hybrid
+    </span>
+    <span class="hero-badge">
+      <svg width="12" height="12" fill="none" stroke="var(--accent)" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Open to Opportunities
+    </span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" style="scroll-margin-top:64px">
+<div class="section-inner">
+  <p class="section-label">Introduction</p>
+  <h2 class="section-title">About Me</h2>
+  <div class="section-divider"></div>
+  <div class="about-grid">
+    <div>
+      <div class="about-avatar">
+        <div class="avatar-initials">RRC</div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <p>I'm an <strong>MBA student at NJIT</strong> specializing in Finance and Marketing, with a B.Tech in Computer Science from GITAM. My background gives me a rare ability to work across both <strong>technical and business domains</strong> &mdash; I can speak the language of engineers, analysts, and executives alike.</p>
+      <p>I've applied this hybrid perspective on real-world projects: building a <strong>$300K+ medical device budget model</strong> and developing a full <strong>go-to-market strategy for an AI-powered posture wearable</strong> as my MBA capstone. I'm passionate about data-driven decision-making, product strategy, and turning complex data into clear business value.</p>
+      <p>I completed the <strong>Bloomberg Market Concepts (BMC)</strong> certification &mdash; connecting classroom finance theory to how real markets operate. Fluent in English and Hindi.</p>
+      <div class="highlight-row">
+        <div class="hcard"><div class="num">$300K+</div><div class="lbl">Budget Model Built</div></div>
+        <div class="hcard"><div class="num">1</div><div class="lbl">Bloomberg Cert</div></div>
+        <div class="hcard"><div class="num">2</div><div class="lbl">Industry Projects</div></div>
+        <div class="hcard"><div class="num">CS+MBA</div><div class="lbl">Dual Domain</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- SKILLS -->
+<div id="skills" style="scroll-margin-top:64px">
+<div class="skills-bg">
+<div class="section-inner">
+  <p class="section-label">Toolkit</p>
+  <h2 class="section-title">Skills &amp; Expertise</h2>
+  <div class="section-divider"></div>
+  <div class="skills-grid">
+    <div class="skill-group reveal">
+      <h4>Finance &amp; Analytics</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Financial Modeling</span>
+        <span class="skill-tag">Bloomberg Terminal</span>
+        <span class="skill-tag">Data Analysis</span>
+        <span class="skill-tag">Budgeting</span>
+        <span class="skill-tag">Revenue Forecasting</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h4>Product &amp; Strategy</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Product Management</span>
+        <span class="skill-tag">Go-to-Market Strategy</span>
+        <span class="skill-tag">JTBD Framework</span>
+        <span class="skill-tag">SWOT Analysis</span>
+        <span class="skill-tag">Business Model Canvas</span>
+        <span class="skill-tag">Stakeholder Management</span>
+        <span class="skill-tag">Roadmap Planning</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h4>Technical</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Data Visualization</span>
+        <span class="skill-tag">Pandas &amp; NumPy</span>
+        <span class="skill-tag">HTML / CSS / JS</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <h4>Regulatory &amp; Research</h4>
+      <div class="skill-tags">
+        <span class="skill-tag">FDA 510(k) Pathway</span>
+        <span class="skill-tag">SBIR Grant Modeling</span>
+        <span class="skill-tag">Market Research</span>
+        <span class="skill-tag">Competitive Analysis</span>
+        <span class="skill-tag">Gantt Tracking</span>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects" style="scroll-margin-top:64px">
+<div class="section-inner">
+  <p class="section-label">Portfolio</p>
+  <h2 class="section-title">Featured Projects</h2>
+  <div class="section-divider"></div>
+  <div class="projects-grid">
+
+    <!-- DermaMech -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <span class="project-type type-med">Medical Device Strategy</span>
+        <span class="project-date">Sep &ndash; Dec 2024</span>
+      </div>
+      <h3 class="project-title">DermaMech</h3>
+      <p class="project-subtitle">Skin Graft Medical Device &mdash; Strategy &amp; Financial Planning</p>
+      <p class="project-desc">Led strategy and financial planning for a skin graft medical device. Built a comprehensive SBIR-style budget framework and coordinated a multi-disciplinary team of clinical surgeons, biomechanics researchers, and industry advisors toward FDA clearance.</p>
+      <div class="impact-row">
+        <div class="istat"><div class="val">$300K+</div><div class="desc">SBIR-style Budget</div></div>
+        <div class="istat"><div class="val">&ge;30%</div><div class="desc">Tissue Expansion</div></div>
+        <div class="istat"><div class="val">&ge;90%</div><div class="desc">Cell Viability</div></div>
+        <div class="istat"><div class="val">12-mo</div><div class="desc">Roadmap Built</div></div>
+      </div>
+      <ul class="project-bullets">
+        <li>Built $300K+ SBIR-style multi-line budget model with milestone-based allocation</li>
+        <li>Designed 12-month product roadmap with measurable clinical performance milestones</li>
+        <li>Mapped complete FDA 510(k) regulatory pathway for market approval</li>
+        <li>Implemented Gantt-based project tracking system across 3 cross-functional teams</li>
+        <li>Coordinated clinical surgeons, biomechanics researchers, and industry advisors</li>
+      </ul>
+      <div class="ptags">
+        <span class="ptag">Financial Modeling</span>
+        <span class="ptag">FDA 510(k)</span>
+        <span class="ptag">SBIR Budgeting</span>
+        <span class="ptag">Roadmap Planning</span>
+        <span class="ptag">Stakeholder Mgmt</span>
+        <span class="ptag">Gantt Tracking</span>
+        <span class="ptag">Program Management</span>
+      </div>
+    </div>
+
+    <!-- SpineSense -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <span class="project-type type-prod">MBA Capstone</span>
+        <span class="project-date">Jan &ndash; May 2025</span>
+      </div>
+      <h3 class="project-title">SpineSense</h3>
+      <p class="project-subtitle">AI-Powered Posture Wearable &mdash; Go-to-Market Strategy</p>
+      <p class="project-desc">MBA capstone developing a full go-to-market strategy for an AI-powered posture correction wearable. Combined consumer research, business modeling, and technical architecture design to create an investment-ready market entry plan.</p>
+      <div class="impact-row">
+        <div class="istat"><div class="val">10K</div><div class="desc">Units Yr 1 Forecast</div></div>
+        <div class="istat"><div class="val">JTBD</div><div class="desc">Framework Applied</div></div>
+        <div class="istat"><div class="val">Full</div><div class="desc">Tech Ecosystem</div></div>
+        <div class="istat"><div class="val">GTM</div><div class="desc">Deck + Financials</div></div>
+      </div>
+      <ul class="project-bullets">
+        <li>Built detailed customer personas using the Jobs-to-be-Done (JTBD) framework</li>
+        <li>Developed Business Model Canvas with revenue forecast of 10,000 units in Year 1</li>
+        <li>Conducted competitive SWOT analysis across the wearable health technology market</li>
+        <li>Designed full technical ecosystem architecture: sensors, ML pipeline, cloud integration</li>
+        <li>Delivered investment-ready GTM presentation with financial projections and pricing strategy</li>
+      </ul>
+      <div class="ptags">
+        <span class="ptag">Go-to-Market</span>
+        <span class="ptag">JTBD Framework</span>
+        <span class="ptag">Business Model Canvas</span>
+        <span class="ptag">Revenue Forecasting</span>
+        <span class="ptag">SWOT Analysis</span>
+        <span class="ptag">ML / IoT Architecture</span>
+        <span class="ptag">Product Strategy</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- EXPERIENCE -->
+<div id="experience" style="scroll-margin-top:64px">
+<div class="section-inner">
+  <p class="section-label">Work History</p>
+  <h2 class="section-title">Experience</h2>
+  <div class="section-divider"></div>
+  <div class="timeline">
+    <div class="titem reveal">
+      <div class="tmeta">
+        <span class="tperiod">May 2023 &ndash; Jul 2023</span>
+        <span class="tloc">Remote</span>
+      </div>
+      <div class="ttitle">Web Development Intern</div>
+      <div class="torg">CodeClause</div>
+      <div class="tcontent">
+        <p>Developed and maintained web application features as part of an agile team, contributing to client-facing projects from design through deployment.</p>
+        <ul>
+          <li>Built responsive UI components using HTML, CSS, and JavaScript</li>
+          <li>Collaborated cross-functionally on feature delivery, testing, and quality assurance</li>
+          <li>Translated design mockups into functional, accessible web interfaces</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- EDUCATION -->
+<div id="education" style="scroll-margin-top:64px">
+<div class="edu-bg">
+<div class="section-inner">
+  <p class="section-label">Academic Background</p>
+  <h2 class="section-title">Education</h2>
+  <div class="section-divider"></div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-icon">&#127891;</div>
+      <div class="edu-degree">Master of Business Administration (MBA)</div>
+      <div class="edu-field">Finance &amp; Marketing</div>
+      <div class="edu-school">New Jersey Institute of Technology (NJIT)</div>
+      <div class="edu-period">Aug 2024 &ndash; May 2026 &nbsp;(Expected)</div>
+      <div class="edu-notes">Completed Bloomberg Market Concepts (BMC), connecting classroom finance theory to real market dynamics. Capstone: SpineSense AI wearable go-to-market strategy.</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-icon">&#128187;</div>
+      <div class="edu-degree">Bachelor of Technology (B.Tech)</div>
+      <div class="edu-field">Computer Science</div>
+      <div class="edu-school">GITAM University</div>
+      <div class="edu-period">Jul 2020 &ndash; Apr 2024</div>
+      <div class="edu-notes">Built a strong technical foundation in software engineering, databases, data structures, and algorithms. This CS background enables effective collaboration with engineering and product teams in business-facing roles.</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- CERTIFICATIONS -->
+<div id="certifications" style="scroll-margin-top:64px">
+<div class="section-inner">
+  <p class="section-label">Credentials</p>
+  <h2 class="section-title">Certifications</h2>
+  <div class="section-divider"></div>
+  <div class="cert-grid">
+    <div class="cert-card bbg reveal">
+      <div class="cert-badge-row">
+        <div class="cert-icon ci-bbg">BBG</div>
+        <span class="cert-pill cp-bbg">Featured</span>
+      </div>
+      <div class="cert-name">Bloomberg Market Concepts (BMC)</div>
+      <div class="cert-issuer">Bloomberg LP</div>
+      <div class="cert-relevance">&#11088; Core credential for Financial Analyst roles &mdash; covers equities, fixed income, FX, commodities &amp; economic indicators via Bloomberg Terminal</div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge-row">
+        <div class="cert-icon ci-coursera">C</div>
+        <span class="cert-pill cp-coursera">Coursera</span>
+      </div>
+      <div class="cert-name">Database Management Essentials</div>
+      <div class="cert-issuer">Coursera</div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-badge-row">
+        <div class="cert-icon ci-coursera">C</div>
+        <span class="cert-pill cp-coursera">Coursera</span>
+      </div>
+      <div class="cert-name">Python for Data Analysis: Pandas &amp; NumPy</div>
+      <div class="cert-issuer">Coursera</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" style="scroll-margin-top:64px">
+<div class="contact-bg">
+<div class="section-inner">
+  <div class="contact-wrap">
+    <p class="section-label" style="text-align:center">Let&rsquo;s Connect</p>
+    <h2 class="section-title" style="text-align:center">Get In Touch</h2>
+    <div class="section-divider" style="margin-left:auto;margin-right:auto"></div>
+    <p class="contact-text">
+      I&rsquo;m actively seeking <strong>Financial Analyst</strong>, <strong>Product Manager</strong>, and <strong>Program Manager</strong> internship or full-time opportunities in the NJ / NYC Metro area. Whether you have a role that fits or just want to connect &mdash; my inbox is always open.
+    </p>
+    <div class="open-to">Open to Opportunities &mdash; Internship &amp; Full-Time</div>
+    <div class="contact-links reveal">
+      <a class="clink" href="mailto:raghavendrareddychoda@gmail.com">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>
+        raghavendrareddychoda@gmail.com
+      </a>
+      <a class="clink" href="https://linkedin.com/in/raghavendra-reddy-choda" target="_blank" rel="noopener">
+        <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn Profile
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Raghavendra Reddy Choda &nbsp;&middot;&nbsp; MBA Candidate, NJIT &nbsp;&middot;&nbsp; Finance &amp; Product &nbsp;&middot;&nbsp; NJ / NYC Metro</p>
+</footer>
+
+<script>
+(function(){
+  var nav = document.getElementById('navbar');
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  var ham = document.getElementById('hamburger');
+  var mob = document.getElementById('mobile-menu');
+  ham.addEventListener('click', function(){ mob.classList.toggle('open'); });
+  mob.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ mob.classList.remove('open'); });
+  });
+
+  // Scroll reveal
+  var ro = new IntersectionObserver(function(entries){
+    entries.forEach(function(e, i){
+      if(e.isIntersecting){
+        setTimeout(function(){ e.target.classList.add('vis'); }, i * 80);
+        ro.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(function(el){ ro.observe(el); });
+
+  // Skill tag stagger
+  document.querySelectorAll('.skill-group').forEach(function(group){
+    var to = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.querySelectorAll('.skill-tag').forEach(function(t, i){
+            setTimeout(function(){ t.classList.add('vis'); }, i * 55);
+          });
+          to.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    to.observe(group);
+  });
+
+  // Active nav highlight
+  var navAs = document.querySelectorAll('.nav-links a');
+  var sectionIds = ['about','skills','projects','experience','education','certifications','contact'];
+  window.addEventListener('scroll', function(){
+    var cur = '';
+    sectionIds.forEach(function(id){
+      var el = document.getElementById(id);
+      if(el && el.getBoundingClientRect().top <= 80) cur = id;
+    });
+    navAs.forEach(function(a){
+      var href = a.getAttribute('href').replace('#','');
+      a.classList.toggle('active', href === cur);
+    });
+  });
+})();
+</script>
+</body>
+</html>
